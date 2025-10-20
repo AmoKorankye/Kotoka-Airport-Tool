@@ -1,0 +1,211 @@
+{
+  "airport_info": {
+    "name": "Kotoka International Airport",
+    "code": "ACC",
+    "location": "Accra, Ghana",
+    "description": "Main international gateway to Ghana and one of the busiest airports in West Africa",
+    "terminals": [
+      {
+        "terminal": "Terminal 1",
+        "purpose": "Primarily used for domestic flights"
+      },
+      {
+        "terminal": "Terminal 2", 
+        "purpose": "Regional and some international flights"
+      },
+      {
+        "terminal": "Terminal 3",
+        "purpose": "Main international terminal - newest and most modern"
+      }
+    ]
+  },
+  "facilities": {
+    "wifi": {
+      "availability": "Free WiFi available in Terminals 2 and 3",
+      "network_name": "KIA FREE WIFI",
+      "instructions": "Connect to 'KIA FREE WIFI' and follow on-screen instructions"
+    },
+    "atms_banking": {
+      "atms": "Available in all terminals",
+      "currency_exchange": "Located in arrival and departure areas with competitive exchange rates",
+      "banks": "Some banks have branches or ATMs at the airport"
+    },
+    "restaurants_dining": [
+      {
+        "name": "SkyBar",
+        "type": "Bar/Restaurant",
+        "terminal": "Terminal 3"
+      },
+      {
+        "name": "Akwaaba Restaurant", 
+        "type": "Restaurant",
+        "cuisine": "Local and international"
+      },
+      {
+        "type": "Cafes",
+        "description": "Selection of restaurants and cafes offering both local and international cuisine"
+      }
+    ],
+    "bathrooms": {
+      "availability": "Available in all terminals",
+      "baby_changing": "Baby changing facilities available",
+      "family_rooms": "Family rooms available for families with young children"
+    },
+    "lounges": [
+      {
+        "name": "Adinkra Lounge",
+        "amenities": "Refreshments, comfortable seating, business facilities"
+      },
+      {
+        "name": "Sanbra Priority Lounge", 
+        "amenities": "Refreshments, comfortable seating, business facilities"
+      }
+    ],
+    "shopping": {
+      "duty_free": "Wide range of products including electronics, cosmetics, and souvenirs",
+      "retail": "Clothing, accessories, Ghanaian crafts, and local products"
+    }
+  },
+  "sim_cards": {
+    "vendor": {
+      "name": "Smice Digital SIM card store",
+      "location": "Left-hand side after exiting the arrival hall",
+      "operating_hours": "Standard operating hours align with flight schedules (closes around 9-10 PM)",
+      "after_midnight": false,
+      "note": "No official MTN or Vodafone stores at airport"
+    },
+    "requirements": {
+      "passport": "Required for registration - copy will be taken",
+      "unlocked_phone": "Phone must be unlocked to work with local SIM cards",
+      "payment": "Cash (GHS) most widely accepted, some counters may accept cards",
+      "extended_stay": "Non-Citizen Ghana Card needed for stays longer than 30 days"
+    },
+    "pricing": {
+      "sim_card_cost": "Around GHS 30 ($1.87 USD) - may cost more at airport",
+      "note": "Airport prices approximately double city prices ($4-$8)"
+    },
+    "data_plans": {
+      "vodafone": [
+        {"data": "2 GB", "price_ghs": 20, "price_usd": 1.24},
+        {"data": "4.5 GB", "price_ghs": 50, "price_usd": 3.11},
+        {"data": "10 GB", "price_ghs": 100, "price_usd": 6.22},
+        {"data": "30 GB", "price_ghs": 200, "price_usd": 12.44},
+        {"data": "90 GB", "price_ghs": 300, "price_usd": 18.66},
+        {"data": "190 GB", "price_ghs": 400, "price_usd": 24.88}
+      ],
+      "mtn": [
+        {"data": "718.91 MB", "price_ghs": 10, "price_usd": 0.62},
+        {"data": "1.19 GB", "price_ghs": 20, "price_usd": 1.24},
+        {"data": "2.38 GB", "price_ghs": 40, "price_usd": 2.49},
+        {"data": "5.07 GB", "price_ghs": 85, "price_usd": 5.29},
+        {"data": "9.44 GB", "price_ghs": 120, "price_usd": 7.47},
+        {"data": "79.61 GB", "price_ghs": 300, "price_usd": 18.66},
+        {"data": "90.23 GB", "price_ghs": 340, "price_usd": 21.14}
+      ]
+    },
+    "esim_alternative": {
+      "available": true,
+      "provider": "Gigago",
+      "price_range": "$5.0 - $31.9",
+      "starting_plan": "1GB/day for 7 days - $5.0"
+    }
+  },
+  "transportation": {
+    "taxis": {
+      "airport_taxis": {
+        "location": "Outside terminals",
+        "description": "Official airport taxis - reliable and safe",
+        "recommendation": "Agree on fare before starting journey"
+      },
+      "ride_hailing": {
+        "services": ["Uber", "Bolt"],
+        "description": "Convenient and often more affordable alternative to traditional taxis"
+      }
+    },
+    "car_rentals": {
+      "companies": ["Avis", "Hertz", "Europcar"],
+      "location": "Counters at the airport",
+      "recommendation": "Book in advance, especially during peak travel seasons"
+    },
+    "public_transport": {
+      "hotel_shuttles": "Some hotels offer complimentary shuttle services",
+      "buses_minibuses": "Public buses and tro-tros available - suitable for adventurous travelers"
+    },
+    "popular_destinations": {
+      "note": "Taxi fares to major areas like Osu, East Legon, Airport City vary - negotiate or use ride-hailing apps for transparent pricing"
+    }
+  },
+  "emergency_services": {
+    "medical": {
+      "airport_clinic": {
+        "location": "500 metres from terminal",
+        "services": ["dental", "physiotherapy", "paediatric", "gynecology"],
+        "hours": "24/7 service",
+        "accessibility": "Open to general public"
+      },
+      "port_health": {
+        "location": "Terminal 3",
+        "services": ["yellow fever vaccination", "primary health services"]
+      },
+      "pharmacy": "Located within terminals"
+    },
+    "security": {
+      "airport_security": "Multiple security checkpoints throughout terminals",
+      "emergency_contacts": "Contact customer service for emergency assistance"
+    },
+    "lost_and_found": {
+      "location": "Arrival Hall desk",
+      "hours": "24/7 operation",
+      "baggage_issues": {
+        "aviance": "+233-544334024",
+        "menzies": "+233-302961975"
+      },
+      "note": "Report lost/damaged/delayed luggage immediately before exiting airport"
+    }
+  },
+  "customer_service": {
+    "gacl_info": {
+      "phone": "+233 (0) 302 550 612",
+      "email": "info@gacl.com.gh",
+      "address": "KA PMB 36 KIA Accra, Ghana",
+      "digital_address": "GL – 125 - 6946"
+    },
+    "service_desks": {
+      "terminal_2": {
+        "arrival": "Desk located in arrival hall",
+        "departure": "Desk located in departure check-in hall"
+      },
+      "terminal_3": {
+        "arrival": "Desk in arrival hall, baggage reclaim area", 
+        "departure": "Desk located at departure check-in"
+      }
+    },
+    "information_desks": "Located throughout terminals to assist travelers with inquiries"
+  },
+  "check_in_services": {
+    "check_in_counters": "Located in Terminals 2 and 3 departures",
+    "self_service_kiosks": "Available for KQ, SAA and KLM passengers",
+    "online_check_in": "Most airlines offer online check-in",
+    "opening_hours": "Check-in counters open 2-3 hours before flight takeoff",
+    "recommendation": "Arrive 2 hours before departure for domestic, 3 hours for international",
+    "baggage_wrapping": "Available in check-in areas for added security"
+  },
+  "accessibility": {
+    "mobility_assistance": "Facilities for passengers with reduced mobility",
+    "features": ["ramps", "elevators", "dedicated staff assistance"],
+    "family_services": ["baby changing facilities", "family rooms"]
+  },
+  "useful_tips": {
+    "arrival_recommendations": [
+      "Arrive 3 hours early for international flights",
+      "Keep eye on flight information displays",
+      "Download airport or airline app for real-time updates",
+      "Arrange transportation in advance"
+    ],
+    "amenities_advice": [
+      "Take advantage of lounges and dining options",
+      "Free WiFi available throughout airport",
+      "Duty-free shopping available"
+    ]
+  }
+}

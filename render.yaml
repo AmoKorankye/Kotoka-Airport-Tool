@@ -1,0 +1,19 @@
+services:
+  # Flask API Service
+  - type: web
+    name: kotoka-airport-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn api:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GOOGLE_MAPS_API_KEY
+        sync: false
+      - key: CHATBOTS_AFRICA_API_KEY
+        sync: false
+      - key: FLASK_ENV
+        value: production
+    healthCheckPath: /api/health
