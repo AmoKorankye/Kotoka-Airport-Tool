@@ -538,16 +538,26 @@ def whatsapp_webhook():
     try:
         data = request.get_json()
         
+        # DEBUG: Log the raw payload to understand what Chatbots Africa sends
+        print(f"\n🔍 DEBUG - Webhook received payload:")
+        print(f"   Raw JSON: {data}")
+        
         if not data:
             return jsonify({'error': 'No data received'}), 400
         
-        # Extract message details
-        sender = data.get('sender', data.get('from', data.get('phone')))
-        user_message = data.get('message', data.get('text', data.get('body')))
+        # Extract message details (try multiple field names)
+        sender = data.get('sender') or data.get('from') or data.get('phone') or data.get('whatsapp_id')
+        user_message = data.get('message') or data.get('text') or data.get('body')
+        
+        # Check if this is a verification/health check from Chatbots Africa
+        if 'challenge' in data or 'verify' in data:
+            print("✅ Webhook verification request received")
+            return jsonify({'challenge': data.get('challenge', 'ok')}), 200
         
         if not sender or not user_message:
             print("⚠️  Missing sender or message in webhook payload")
-            return jsonify({'error': 'Missing required fields: sender and message'}), 400
+            print(f"   Available keys: {list(data.keys())}")
+            return jsonify({'error': 'Missing required fields: sender and message', 'received_keys': list(data.keys())}), 400
         
         print(f"\n📱 Incoming WhatsApp message from {sender}")
         print(f"   Message: {user_message}")
