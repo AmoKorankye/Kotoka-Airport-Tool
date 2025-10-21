@@ -456,9 +456,23 @@ def send_whatsapp_message(destination: str, message: str) -> dict:
     # Ensure message doesn't exceed WhatsApp limit
     truncated_message = message[:4096] if len(message) > 4096 else message
     
+    # Get API key
+    api_key = os.getenv('CHATBOTS_AFRICA_API_KEY')
+    
+    # Normalize destination to local Ghana format (0XXXXXXXXX)
+    # Remove +233 or 233 prefix and ensure it starts with 0
+    normalized_dest = destination.strip()
+    if normalized_dest.startswith('+233'):
+        normalized_dest = '0' + normalized_dest[4:]
+    elif normalized_dest.startswith('233'):
+        normalized_dest = '0' + normalized_dest[3:]
+    elif not normalized_dest.startswith('0'):
+        normalized_dest = '0' + normalized_dest
+    
+    # Correct payload format per Chatbots Africa documentation
     payload = {
-        "apikey": os.getenv("CHATBOTS_AFRICA_API_KEY"),
-        "destination": destination,
+        "apikey": api_key,
+        "destination": normalized_dest,
         "message": truncated_message
     }
     
@@ -466,16 +480,36 @@ def send_whatsapp_message(destination: str, message: str) -> dict:
         "Content-Type": "application/json"
     }
     
+    # DEBUG: Log request details (mask API key)
+    print(f"\n🔍 DEBUG - WhatsApp API Request:")
+    print(f"   URL: {url}")
+    print(f"   Destination (original): {destination}")
+    print(f"   Destination (normalized): {normalized_dest}")
+    print(f"   API Key present: {bool(api_key)}")
+    print(f"   API Key (masked): {'****' + api_key[-4:] if api_key else 'MISSING'}")
+    print(f"   Message length: {len(truncated_message)}")
+    
     try:
         response = requests.post(url, json=payload, headers=headers, timeout=10)
+        
+        # DEBUG: Log response details
+        print(f"\n📥 DEBUG - WhatsApp API Response:")
+        print(f"   Status Code: {response.status_code}")
+        print(f"   Response Body: {response.text}")
+        
         response.raise_for_status()
         result = response.json()
         
-        print(f"✅ WhatsApp message sent to {destination}")
-        print(f"   Status: {result.get('message', {}).get('message_status', 'unknown')}")
-        print(f"   Message ID: {result.get('message', {}).get('message_id', 'N/A')}")
-        
-        return result
+        # Check if API returned success
+        if result.get('success'):
+            print(f"✅ WhatsApp message sent to {destination}")
+            print(f"   Status: {result.get('message', {}).get('message_status', 'unknown')}")
+            print(f"   Message ID: {result.get('message', {}).get('message_id', 'N/A')}")
+            return result
+        else:
+            print(f"⚠️  WhatsApp API returned success=false")
+            print(f"   Reason: {result.get('reason', 'Unknown')}")
+            return {"success": False, "error": result.get('reason', 'API returned success=false'), "details": result}
         
     except requests.exceptions.Timeout:
         print(f"❌ Timeout sending WhatsApp message to {destination}")
