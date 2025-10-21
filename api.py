@@ -554,6 +554,12 @@ def whatsapp_webhook():
                 entry = data['entry'][0]
                 changes = entry['changes'][0]
                 value = changes['value']
+                
+                # Check if this is a status update (not a message)
+                if 'statuses' in value:
+                    print("ℹ️  Status update received (ignoring)")
+                    return jsonify({'status': 'ok', 'message': 'Status update received'}), 200
+                
                 messages = value.get('messages', [])
                 
                 if messages and len(messages) > 0:
