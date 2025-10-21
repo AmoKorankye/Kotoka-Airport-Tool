@@ -527,32 +527,54 @@ def whatsapp_webhook():
     """
     Webhook endpoint to receive incoming WhatsApp messages from Chatbots Africa
     
-    Expected payload format from Chatbots Africa:
-    {
-        "sender": "233501149794",
-        "message": "Where can I buy a SIM card?",
-        "timestamp": "2025-10-18T10:30:00Z",
-        ...
-    }
+    Handles WhatsApp Business API format with nested structure
     """
     try:
         data = request.get_json()
         
-        # DEBUG: Log the raw payload to understand what Chatbots Africa sends
+        # DEBUG: Log the raw payload
         print(f"\n🔍 DEBUG - Webhook received payload:")
         print(f"   Raw JSON: {data}")
         
         if not data:
             return jsonify({'error': 'No data received'}), 400
         
-        # Extract message details (try multiple field names)
-        sender = data.get('sender') or data.get('from') or data.get('phone') or data.get('whatsapp_id')
-        user_message = data.get('message') or data.get('text') or data.get('body')
-        
-        # Check if this is a verification/health check from Chatbots Africa
+        # Check if this is a verification/health check
         if 'challenge' in data or 'verify' in data:
             print("✅ Webhook verification request received")
             return jsonify({'challenge': data.get('challenge', 'ok')}), 200
+        
+        # Handle WhatsApp Business API format (nested structure)
+        sender = None
+        user_message = None
+        
+        if 'entry' in data:
+            # WhatsApp Business API format
+            try:
+                entry = data['entry'][0]
+                changes = entry['changes'][0]
+                value = changes['value']
+                messages = value.get('messages', [])
+                
+                if messages and len(messages) > 0:
+                    message_obj = messages[0]
+                    sender = message_obj.get('from')
+                    
+                    # Extract message text based on type
+                    if message_obj.get('type') == 'text':
+                        user_message = message_obj.get('text', {}).get('body')
+                    
+                    print(f"📱 Parsed WhatsApp Business format:")
+                    print(f"   Sender: {sender}")
+                    print(f"   Message: {user_message}")
+            except (KeyError, IndexError, TypeError) as e:
+                print(f"⚠️  Error parsing WhatsApp Business format: {e}")
+        
+        # Fallback to simple format (for direct testing)
+        if not sender:
+            sender = data.get('sender') or data.get('from') or data.get('phone')
+        if not user_message:
+            user_message = data.get('message') or data.get('text') or data.get('body')
         
         if not sender or not user_message:
             print("⚠️  Missing sender or message in webhook payload")
